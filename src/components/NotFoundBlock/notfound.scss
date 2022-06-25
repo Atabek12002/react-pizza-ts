@@ -1,0 +1,43 @@
+.notpage {
+  margin: 0 auto;
+  div {
+    gap: 25px;
+    h2 {
+      font-size: 235px;
+      color: #585858;
+      font-weight: 600;
+    }
+    .notpage-n1 {
+      transform: rotate(-7deg);
+    }
+    .notpage-n2 {
+      transform: rotate(7deg);
+    }
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 50px;
+    color: #ff9600;
+  }
+  p {
+    font-size: 16px;
+    color: #787877;
+  }
+  button {
+    width: 200px;
+    padding: 15px 20px;
+    background-color: #1f5fcc;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: #ff9600;
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}

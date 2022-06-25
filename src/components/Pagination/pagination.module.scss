@@ -1,0 +1,44 @@
+.root {
+  display: flex;
+  gap: 5px;
+  li {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fe5f1e;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    &:hover {
+      background-color: #fe5f1e;
+      a {
+        color: #fff;
+      }
+    }
+    &.selected {
+      background-color: #fe5f1e;
+      a {
+        color: #fff;
+      }
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+    a {
+      transition: color 0.3s ease-in-out;
+      color: #fe5f1e;
+    }
+  }
+  :global {
+    .selected {
+      background-color: #fe5f1e;
+      a {
+        color: #fff;
+      }
+    }
+  }
+}

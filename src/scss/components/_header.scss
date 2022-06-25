@@ -1,0 +1,32 @@
+@import '../variables';
+
+.header {
+  border-bottom: 1px solid $gray-line;
+  padding: 40px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    img {
+      margin-right: 15px;
+    }
+
+    h1 {
+      color: #181818;
+      font-size: calc(16px + (24 - 16)*((100vw - 320px) / (1200 - 320)));
+      letter-spacing: 1%;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: calc(11px + (18 - 11)*((100vw - 320px) / (1200 - 320)));
+      color: #7b7b7b;
+    }
+  }
+}
