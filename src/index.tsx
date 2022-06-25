@@ -11,7 +11,7 @@ import { store } from './redux/store';
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <Provider store={store}>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <App />
     </Router>
   </Provider>,
