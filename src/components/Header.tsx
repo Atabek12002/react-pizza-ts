@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       const json = JSON.stringify(items);
       localStorage.setItem('cart', json);
       if (!items.length) {
-        localStorage.clear();
+        localStorage.removeItem('cart');
       }
     }
     isMountes.current = true;

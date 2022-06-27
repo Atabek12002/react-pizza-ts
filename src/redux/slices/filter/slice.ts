@@ -28,18 +28,18 @@ const filterSlice = createSlice({
       state.pageCount = payload;
     },
     setFilters(state, { payload }: PayloadAction<FilterStateSlice>) {
-      // if (Object.keys(payload).length) {
-      state.pageCount = Number(payload.pageCount);
-      state.categoryId = Number(payload.categoryId);
-      state.sort = payload.sort;
-      // } else {
-      //   state.pageCount = 1;
-      //   state.categoryId = 0;
-      //   state.sort = {
-      //     name: 'популярности',
-      //     sortProperty: SortPropertyEnum.RATING_DESC,
-      //   };
-      // }
+      if (Object.keys(payload).length) {
+        state.pageCount = Number(payload.pageCount);
+        state.categoryId = Number(payload.categoryId);
+        state.sort = payload.sort;
+      } else {
+        state.pageCount = 1;
+        state.categoryId = 0;
+        state.sort = {
+          name: 'популярности',
+          sortProperty: SortPropertyEnum.RATING_DESC,
+        };
+      }
     },
   },
 });
