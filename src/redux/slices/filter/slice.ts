@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { params } from '../../../utils/getParams';
 import { FilterStateSlice, Sort, SortPropertyEnum } from './types';
 
 const initialState: FilterStateSlice = {
   searchValue: '',
-  categoryId: 0,
+  categoryId: params.categoryId ? Number(params.categoryId) : 0,
   pageCount: 1,
   sort: {
     name: 'популярности',

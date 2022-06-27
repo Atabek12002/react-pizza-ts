@@ -17,6 +17,7 @@ import { selectFilter } from '../redux/slices/filter/selectors';
 
 import NotFound from './NotFound';
 import { useAppDispatch } from '../redux/store';
+import { params } from '../utils/getParams';
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -62,7 +63,6 @@ const Home: React.FC = () => {
   // Если был первый рендер, то проверяем URL -параметры и сохраняем в redux
   React.useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1)) as Record<string, string>;
       const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
       dispatch(
         setFilters({
@@ -74,6 +74,7 @@ const Home: React.FC = () => {
       );
       isSearch.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   // Если был первый рендер, то запрашиваем пиццы
