@@ -5,7 +5,7 @@ import { FilterStateSlice, Sort, SortPropertyEnum } from './types';
 const initialState: FilterStateSlice = {
   searchValue: '',
   categoryId: params.categoryId ? Number(params.categoryId) : 0,
-  pageCount: 1,
+  pageCount: params.pageCount ? Number(params.pageCount) : 1,
   sort: {
     name: 'популярности (DESC)',
     sortProperty: SortPropertyEnum.RATING_DESC,

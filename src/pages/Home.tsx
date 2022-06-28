@@ -64,6 +64,7 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+      console.log(params);
       dispatch(
         setFilters({
           searchValue: params.search,
@@ -75,7 +76,7 @@ const Home: React.FC = () => {
       isSearch.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, []);
 
   // Если был первый рендер, то запрашиваем пиццы
   // eslint-disable-next-line react-hooks/exhaustive-deps
