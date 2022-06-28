@@ -8,10 +8,23 @@ export const fetchPizzas = createAsyncThunk<Pizza[], Record<string, string>>(
   async (params) => {
     const { order, sortBy, category, search, pageCount } = params;
     try {
-      const { data } = await api.get(
+      const res = await api.get(
         `/items?page=${pageCount}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`,
       );
-      return data;
+      return res.data;
+    } catch (error) {
+      alert('Ощибка при получений пиццы!');
+    }
+  },
+);
+
+export const getFullPizza = createAsyncThunk<Pizza[], Record<string, string>>(
+  'pizza/getFullPizza',
+  async (params) => {
+    try {
+      const { category } = params;
+      const res = await api.get(`/items?${category}`);
+      return res.data;
     } catch (error) {
       alert('Ощибка при получений пиццы!');
     }
@@ -20,6 +33,7 @@ export const fetchPizzas = createAsyncThunk<Pizza[], Record<string, string>>(
 
 const initialState: PizzaSliceState = {
   items: [],
+  fullItems: [],
   status: Status.LOADING,
 };
 
@@ -39,6 +53,19 @@ const pizzaSlice = createSlice({
     builder.addCase(fetchPizzas.rejected, (state) => {
       state.status = Status.ERROR;
       state.items = [];
+    });
+
+    builder.addCase(getFullPizza.pending, (state) => {
+      state.status = Status.LOADING;
+      state.fullItems = [];
+    });
+    builder.addCase(getFullPizza.fulfilled, (state, { payload }) => {
+      state.status = Status.SUCCESS;
+      state.fullItems = payload;
+    });
+    builder.addCase(getFullPizza.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.fullItems = [];
     });
   },
 });

@@ -24,7 +24,7 @@ const FullPizza: React.FC = () => {
         navigate('/');
       }
     })();
-  }, []);
+  }, [id, navigate]);
 
   if (!pizza) {
     return <h1>Loading...</h1>;

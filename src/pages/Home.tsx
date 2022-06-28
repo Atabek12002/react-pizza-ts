@@ -9,7 +9,7 @@ import { list } from '../components/Sort';
 import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from '../components';
 
 import { Pizza } from '../redux/slices/pizza/types';
-import { fetchPizzas } from '../redux/slices/pizza/slice';
+import { fetchPizzas, getFullPizza } from '../redux/slices/pizza/slice';
 import { selectPizza } from '../redux/slices/pizza/selectors';
 
 import { setPageCount, setCategoryId, setFilters } from '../redux/slices/filter/slice';
@@ -39,12 +39,14 @@ const Home: React.FC = () => {
 
   const onChangePage = (num: number) => dispatch(setPageCount(num));
 
+  const category = categoryId > 0 ? `category=${categoryId}` : ``;
+
   const getPizzas = () => {
     const order = sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortProperty.replace('-', '');
-    const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const search = searchValue ? `search=${searchValue}` : ``;
     dispatch(fetchPizzas({ order, sortBy, category, search, pageCount: String(pageCount) }));
+    dispatch(getFullPizza({ category }));
   };
 
   // Если изменили параметры и был первый рендер
@@ -64,7 +66,6 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
-      console.log(params);
       dispatch(
         setFilters({
           searchValue: params.search,
@@ -83,7 +84,7 @@ const Home: React.FC = () => {
   React.useEffect(() => getPizzas(), [categoryId, sortProperty, searchValue, pageCount]);
 
   const pizzas = items.map((obj: Pizza) => <PizzaBlock key={obj.id} {...obj} />);
-  const skeletons = [...Array(6)].map((_, i) => <Skeleton key={i} />);
+  const skeletons = [...Array(4)].map((_, i) => <Skeleton key={i} />);
 
   return (
     <div>
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )}
-      <Pagination onChangePage={onChangePage} />
+      <Pagination categoryId={categoryId} onChangePage={onChangePage} />
     </div>
   );
 };
