@@ -7,7 +7,7 @@ const initialState: FilterStateSlice = {
   categoryId: params.categoryId ? Number(params.categoryId) : 0,
   pageCount: 1,
   sort: {
-    name: 'популярности',
+    name: 'популярности (DESC)',
     sortProperty: SortPropertyEnum.RATING_DESC,
   },
 };
