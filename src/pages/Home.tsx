@@ -37,11 +37,10 @@ const Home: React.FC = () => {
     [dispatch],
   );
 
-  const onChangePage = (num: number) => dispatch(setPageCount(num));
-
-  const category = categoryId > 0 ? `category=${categoryId}` : ``;
+  const onChangePage = React.useCallback((num: number) => dispatch(setPageCount(num)), [dispatch]);
 
   const getPizzas = () => {
+    const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const order = sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortProperty.replace('-', '');
     const search = searchValue ? `search=${searchValue}` : ``;
@@ -98,7 +97,7 @@ const Home: React.FC = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )}
-      <Pagination categoryId={categoryId} onChangePage={onChangePage} />
+      <Pagination onChangePage={onChangePage} />
     </div>
   );
 };

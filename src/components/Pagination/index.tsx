@@ -2,17 +2,17 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { useSelector } from 'react-redux';
 import { selectPizza } from '../../redux/slices/pizza/selectors';
+import { useWhyDidYouUpdate } from 'ahooks';
 
 import { params } from '../../utils/getParams';
 
 import styles from './pagination.module.scss';
 
 type PaginationProps = {
-  categoryId: number;
   onChangePage: (num: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({ onChangePage }) => {
+const Pagination: React.FC<PaginationProps> = React.memo(({ onChangePage }) => {
   const { fullItems } = useSelector(selectPizza);
   return (
     <ReactPaginate
@@ -26,6 +26,6 @@ const Pagination: React.FC<PaginationProps> = ({ onChangePage }) => {
       pageCount={Math.ceil(fullItems.length / 4)}
     />
   );
-};
+});
 
 export default Pagination;
